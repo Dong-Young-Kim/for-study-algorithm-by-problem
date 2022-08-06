@@ -6,3 +6,19 @@
 물론, 어떤 자연수의 경우에는 생성자가 없을 수도 있다. 반대로, 생성자가 여러 개인 자연수도 있을 수 있다.
 자연수 N이 주어졌을 때, N의 가장 작은 생성자를 구해내는 프로그램을 작성하시오.
 */
+
+#include <stdio.h>
+
+int divideSum(int num){
+    int sum = num;
+    while (num > 0){
+        sum += num % 10;
+        num /= 10;
+    }
+    return sum;
+}
+
+int main(){
+    printf("%d\n", divideSum(245));
+
+}
