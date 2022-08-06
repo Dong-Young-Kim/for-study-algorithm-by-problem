@@ -8,7 +8,6 @@
 */
 
 #include <stdio.h>
-
 int divideSum(int num){
     int sum = num;
     while (num > 0){
@@ -17,8 +16,21 @@ int divideSum(int num){
     }
     return sum;
 }
-
 int main(){
-    printf("%d\n", divideSum(245));
-
+    int num;
+    scanf("%d",&num);
+    int i;
+    for (i = 1; i < num; i++){
+        if (divideSum(i)==num) {
+            printf("%d\n",i);
+            break;
+        }
+    }
+    if(i==num) printf("0\n");
 }
+/*
+이 문제 해결의 아이디어는 분배합을 구하는 모든 경우를 1부터 비교해나간다
+단순히 한 번의 과정으로 최소 생성자를 구해내는 것이 아니라
+생성자는 입력된 수보다 작으므로 
+1부터 입력된 수까지 값을 키우면 생성자를 구할 수 있다.
+*/
