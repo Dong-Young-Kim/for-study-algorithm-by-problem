@@ -67,13 +67,12 @@ int main(){
             case '(': s.push('('); break;
             case '[': s.push('['); break;
             //case ')': s.top() == '(' ? s.pop() : failFlag = 1 ; break;
-            case ')': if(s.top() == '(') s.pop(); else failFlag = 1; break;
+            case ')': if(s.empty()) break; if(s.top() == '(') s.pop(); else failFlag = 1; break;
             //case ']': s.top() == '[' ? s.pop() : failFlag = 1 ; break;
-            case ']': if(s.top() == '[') s.pop(); else failFlag = 1; break;
+            case ']': if(s.empty()) break; if(s.top() == '[') s.pop(); else failFlag = 1; break;
             }
-            s.pop();
             if(failFlag) break;
         }
-        cout << s.empty() ? "yes\n" : "no\n";
+        cout << (s.empty()) ? "yes\n" : "no\n";
     }
 }
