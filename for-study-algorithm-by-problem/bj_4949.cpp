@@ -61,18 +61,17 @@ int main(){
         string str;
         getline(cin,str);
         if(str == ".") break;
+        bool failFlag;
         for(char c : str){
-            bool failFlag = 0;
+            failFlag = 0;
             switch(c){
             case '(': s.push('('); break;
             case '[': s.push('['); break;
-            //case ')': s.top() == '(' ? s.pop() : failFlag = 1 ; break;
-            case ')': if(s.empty()) break; if(s.top() == '(') s.pop(); else failFlag = 1; break;
-            //case ']': s.top() == '[' ? s.pop() : failFlag = 1 ; break;
-            case ']': if(s.empty()) break; if(s.top() == '[') s.pop(); else failFlag = 1; break;
+            case ')': failFlag = 1; if(s.empty()) break; if(s.top() == '(') {s.pop(); failFlag = 0;} break;
+            case ']': failFlag = 1; if(s.empty()) break; if(s.top() == '[') {s.pop(); failFlag = 0;} break;
             }
             if(failFlag) break;
         }
-        cout << (s.empty()) ? "yes\n" : "no\n";
+        cout << ((s.empty() && !failFlag) ? "yes\n" : "no\n");
     }
 }
