@@ -1,9 +1,11 @@
 #include<iostream>
 #include<set>
-#include<vector>
+//#include<vector>
 #include<string>
 using namespace std;
 int main() {
+	cin.tie(NULL);
+	ios_base::sync_with_stdio(false);
 	int T, gomgom = 0;
 	set<string> usrRecord;
 	cin >> T;
@@ -26,8 +28,14 @@ int main() {
 //for문내 rcrdUser를 초기화하지 않아서 크기가 다른 문제
 //정확하게 비교되지 못함
 
+//위 코드에서는 set 사용
 
-//시간초과 문제
+//cin 시간 감소를 위해서 사용 100ms -> 64ms
+//cin.tie(NULL);
+//cout.tie(NULL);
+//ios_base::sync_with_stdio(false);
+
+//시간초과 문제 (매번 비교시 마다 n의 시간 소요)
 //int main() {
 //	int T, gomgom = 0;
 //	vector<string> usrRecord;
