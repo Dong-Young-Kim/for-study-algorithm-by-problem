@@ -25,9 +25,6 @@ int main() {
 }
 
 
-//for문내 rcrdUser를 초기화하지 않아서 크기가 다른 문제
-//정확하게 비교되지 못함
-
 //위 코드에서는 set 사용
 
 //cin 시간 감소를 위해서 사용 100ms -> 64ms
@@ -61,3 +58,7 @@ int main() {
 //	}
 //	cout << gomgom << endl;
 //}
+
+// for문내 rcrdUser를 초기화하지 않아서 크기가 다른 문제
+// vector 내 저장된 string과 입력된 string이 실제로는 같음에도 다르다고 판단됨
+// 크기 또한 다르다고 출력됨
