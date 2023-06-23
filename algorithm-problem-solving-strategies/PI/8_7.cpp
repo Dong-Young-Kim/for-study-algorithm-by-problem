@@ -11,7 +11,7 @@ int classify (int a, int b)
 {
     // 난이도가 낮은 것 부터 차례로 체에 거름
 
-    string M = N.substr(a, b-a+1);
+    string M = N.substr(a, b-a +1);
 
     if (M == string(M.size(), M[0])) return 1; // 연속된 문자인지 판단
 
@@ -53,8 +53,7 @@ int memorize(int begin)
     if (begin + 4 <= N.size()) ret = min(ret, memorize(begin + 4) + classify(begin, begin + 4 - 1));
     if (begin + 5 <= N.size()) ret = min(ret, memorize(begin + 5) + classify(begin, begin + 5 - 1));
 
-    printf("ret %d\n", ret);
-    return ret;
+    return ret; // 문자열의 길이가 2 이하인 경우
 
 }
 
