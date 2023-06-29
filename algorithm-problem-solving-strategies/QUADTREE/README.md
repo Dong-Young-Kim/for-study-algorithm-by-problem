@@ -3,6 +3,8 @@
 ### 문제
 대량의 좌표 데이터를 메모리 안에 압축해 저장하기 위해 사용하는 여러 기법 중 쿼드 트리(quad tree)란 것이 있습니다. 주어진 공간을 항상 4개로 분할해 재귀적으로 표현하기 때문에 쿼드 트리라는 이름이 붙었는데, 이의 유명한 사용처 중 하나는 검은 색과 흰 색밖에 없는 흑백 그림을 압축해 표현하는 것입니다. 쿼드 트리는 2N × 2N 크기의 흑백 그림을 다음과 같은 과정을 거쳐 문자열로 압축합니다.
 
+![quadtree](https://github.com/Dong-Young-Kim/for-study-algorithm-by-problem/assets/72393686/e46e38a3-eafc-43d2-aaeb-698fcbd99b88)
+
 - 이 그림의 모든 픽셀이 검은 색일 경우 이 그림의 쿼드 트리 압축 결과는 그림의 크기에 관계없이 b가 됩니다.
 - 이 그림의 모든 픽셀이 흰 색일 경우 이 그림의 쿼드 트리 압축 결과는 그림의 크기에 관계없이 w가 됩니다.
 - 모든 픽셀이 같은 색이 아니라면, 쿼드 트리는 이 그림을 가로 세로로 각각 2등분해 4개의 조각으로 쪼갠 뒤 각각을 쿼드 트리 압축합니다. 이때 전체 그림의 압축 결과는 x(왼쪽 위 부분의 압축 결과)(오른쪽 위 부분의 압축 결과)(왼쪽 아래 부분의 압축 결과)(오른쪽 아래 부분의 압축 결과)가 됩니다. 예를 들어 그림 (a)의 왼쪽 위 4분면은 xwwwb로 압축됩니다.
@@ -41,3 +43,36 @@ xxwbxwwxbbwwbwbxwbwwxwwwxbbwb
 <br>
 
 ## 문제 해결
+
+
+
+
+--- 
+### 추가
+
+#### 함수에 iterator를 전달하는 방법
+
+7_5.cpp 에서 decompress 함수 호출 시 아래와 같이 사용이 불가능하다
+
+``` cpp
+void decompress(std::string::iterator& it, int x, int y, int size);
+
+...
+
+decompress (compressed.begin(), 0, 0, MAX_SIZE);
+```
+
+비const 참조에 대한 초기 값은 lvalue여야 한다. 'compressed.begin()'는 임시 객체로 lvalue가 아니기 때문에 위와 같은 호출식은 사용할 수 없다.
+
+<br>
+
+``` cpp
+void decompress(std::string::iterator& it, int x, int y, int size);
+
+...
+
+string::iterator it = compressed.begin();
+decompress (it, 0, 0, MAX_SIZE);
+```
+
+compressed.begin()의 반환 값을 iterator 변수에 할당한 후, 해당 변수를 참조로 전달하는 방식을 사용하여 기능을 구현해야 한다.
