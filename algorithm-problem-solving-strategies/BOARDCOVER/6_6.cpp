@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -7,7 +8,7 @@ const int coverType[4][3][2] = {
     {{0, 0}, {1, 0}, {0, 1}}, // ㄱ 의 좌우반전 형태
     {{0, 0}, {0, 1}, {1, 1}}, // ㄱ 형태
     {{0, 0}, {1, 0}, {1, 1}}, // ㄴ 형태
-    {{0, 0}, {0, 1}, {1, -1}} // ㄴ 의 좌우반전 형태
+    {{0, 0}, {1, 0}, {1, -1}} // ㄴ 의 좌우반전 형태
 };
 // 4 : 4가지 type의 블럭을 놓는 경우의 수
 // 3 : 블럭이 차지하는 칸 수
@@ -36,11 +37,14 @@ bool set(vector< vector<int> > & board, int x, int y, int type, int coverFlag)
             board[blockX][blockY] += coverFlag; // 블럭을 놓거나 제거
         }
     }
-    return coverFlag;
+    return canCover;
 }
+
+int depth = 0;
 
 int cover(vector< vector<int> > & board)
 {
+    depth++;
     // 1. board에서 채워지지 않은 칸 찾기
     bool isFilled = 1;
     int x, y;
@@ -63,10 +67,22 @@ int cover(vector< vector<int> > & board)
     int ret = 0;
     for (int type = 0; type < 4; ++type)
     {
-        // 블럭을 덮을 수 있는 경우 
-        if (set(board, x, y, type, 1)) ret += cover(board);
-        set(board, x, y, type, -1);
+        bool canCover = set(board, x, y, type, 1); // 우선 블럭을 놓고, 모순되는 상황인지 확인한다.
+
+        // for debug
+        // printf("DEPTH %d : type %d, canCover %d, \n", depth, type, canCover);
+        // for (int x = 0; x < board.size(); ++x) {
+        //     for (int y = 0; y < board[0].size(); ++y) {
+        //         printf("%d ", board[x][y]);
+        //     }
+        //         printf("\n");
+        // }
+        ////
+
+        if (canCover) ret += cover(board); // 블럭을 놓을 수 있다면 블럭을 놓은 채로 재귀함수 호출(=다음 블럭 놓기)
+        set(board, x, y, type, -1); // 다른 case 확인 위해 블럭을 제거한다.
     }
+    depth--;
     return ret;
 }
 
@@ -82,13 +98,14 @@ int main()
         vector< vector<int> > board(H, vector<int>(W)); //격자는 2차원 vector 에 저장
 
         for (int x = 0; x < H; ++x) {
+            string temp;
+            cin >> temp;
+            // copy(temp.begin(), temp.end(), board[x].begin());
             for (int y = 0; y < W; ++y) {
-                char temp;
-                cin >> temp;
-                board[x][y] = (temp == '#' ? 1 : 0);
+                board[x][y] = (temp[y] == '#' ? 1 : 0);
             }
         }
                 
-        cover(board);
+        printf("%d\n", cover(board));
     }
 }
