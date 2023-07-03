@@ -1,4 +1,5 @@
 // 수식적 계산을 통한 문제 해결
+// 수행시간 O(1)
 
 #include <iostream>
 #include <math.h>
