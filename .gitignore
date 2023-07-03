@@ -21,3 +21,5 @@ for-study-algorithm-by-problem/Debug/for-study-algorithm-by-problem.vcxproj.File
 for-study-algorithm-by-problem/.vs/for-study-algorithm-by-problem/v16/.suo
 *.json
 for-study-algorithm-by-problem/g++ build
+
+test.cpp
