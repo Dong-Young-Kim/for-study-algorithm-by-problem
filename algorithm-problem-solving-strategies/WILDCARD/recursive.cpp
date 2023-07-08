@@ -28,10 +28,10 @@ bool match (const string & p, const string & t)
         for (int k = pos; k <= t.size(); k++)
         {
             // 문자열.substr(시작 index, 길이) <길이 생략시 끝까지>
-            if(match(p.substr(pos+1), t.substr(k))) return true;
+            if(match(p.substr(pos+1), t.substr(k))) return 1;
         }
     }
-    return false;
+    return 0;
 }
 
 int main()
