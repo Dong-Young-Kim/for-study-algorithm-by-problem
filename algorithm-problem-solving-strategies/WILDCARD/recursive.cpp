@@ -46,8 +46,8 @@ int main()
         while (targerT--)
         {
             cin >> t;
-            // if (match(p,t)) cout << t << "\n";
-            cout << match(p,t) << endl;
+            if (match(p,t)) cout << t << "\n";
+            // cout << match(p,t) << endl;
         }
     }
 }
