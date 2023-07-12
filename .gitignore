@@ -16,6 +16,7 @@
 *.ilk
 *.log
 *.out
+*.dSYM
 for-study-algorithm-by-problem/Debug/for-study-algorithm-by-problem.vcxproj.FileListAbsolute.txt
 *.ipch
 for-study-algorithm-by-problem/.vs/for-study-algorithm-by-problem/v16/.suo
