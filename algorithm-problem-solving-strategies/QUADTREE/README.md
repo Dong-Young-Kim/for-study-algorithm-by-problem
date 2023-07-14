@@ -76,3 +76,25 @@ decompress (it, 0, 0, MAX_SIZE);
 ```
 
 compressed.begin()의 반환 값을 iterator 변수에 할당한 후, 해당 변수를 참조로 전달하는 방식을 사용하여 기능을 구현해야 한다.
+
+
+
+#### char 자료형을 string 라턴값으로 전달하기
+
+```cpp
+string reverse(string::iterator & it)
+{
+    char cur_str = *it;
+    it++;
+
+    if(cur_str == 'b' || cur_str == 'w')
+    {
+        return string(1,cur_str);
+
+        ...
+    }
+}
+
+```
+
+위와 같은 경우 char 자료형인 cur_str을 string 인 함수 리턴값에 맞게 전달해야 하는데 이때 string 객체 초기화 방법을 통해서 string 형으로 변환할 수 있다.
