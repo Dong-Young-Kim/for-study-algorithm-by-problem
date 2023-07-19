@@ -25,7 +25,7 @@ int main()
     while(T--)
     {
         
-        fill_n(&cache[0][0], 1000 * 2001, -1.);
+        fill_n(*cache, 1000 * 2001, -1.);
 
         cin >> N >> M;
         

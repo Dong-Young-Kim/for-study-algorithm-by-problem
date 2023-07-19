@@ -6,9 +6,27 @@ int main() {
 
     double arr[rows][cols];
 
+    // 배열 내용 입력
+    int k = 0;
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            // **(arr + k) = k++;
+            *(*(arr+ i) + j) = k++;
+        }
+    }
+    // 배열의 내용 출력 (확인용)
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::cout << arr[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
     std::cout << "Address of arr:       " << arr << std::endl; // 배열 이름 arr은 첫 번째 행의 시작 주소를 가리킵니다.
+    std::cout << "Address of *arr:      " << *arr << std::endl; // 배열 이름 *arr은 첫 번째 행의 시작 주소를 가리킵니다.
     std::cout << "Address of arr[0]:    " << arr[0] << std::endl; // arr[0]은 첫 번째 행의 시작 주소를 가리킵니다.
     std::cout << "Address of arr[0][0]: " << &arr[0][0] << std::endl; // arr[0][0]은 첫 번째 요소의 주소를 가리킵니다.
+    
+    std::cout << "Address of **arr:     " << **arr+5 << std::endl; // arr[0][0]은 첫 번째 요소의 주소를 가리킵니다.
 
     // 배열을 -1.5로 초기화
     std::fill_n(&arr[0][0], rows * cols, -1.5);
