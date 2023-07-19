@@ -59,47 +59,51 @@
 ### DP를 이용한 O(nlogn) 알고리즘
 
 
+
+### 2중 for 문을 이용한 해법
+
 > 재귀 없이 풀어보기
 
-#### py additional
 ``` py
 n = int(input())
-arr = list(map(int,input().split()))
-cnt = [1] * n
+A = list(map(int,input().split()))
+C = [1] * n
 
 for i in range(n):
 	for j in range(i):
-		if arr[j] < arr[i]:
-			cnt[i] = max(cnt[i], cnt[j]+1)
+		if A[j] < A[i]:
+			C[i] = max(C[i], C[j]+1)
 
-print(max(cnt))
+print(max(C))
 ```
 
 ``` cpp
 #include <iostream>
 using namespace std;
 
-int dp[1001];
-int arr[1001];
+int A[1000], C[1000];
 
 int main() {
 	int n;
 	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> dp[i];
-	}
+	fill_n(C, 1000, 1); // 어떤 원소를 최소로 갖는 최소 LIS 길이는 1
+	for (int i = 0; i < n; i++) cin >> A[i];
 	
 	int sum = 0;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < i; j++) {
-			if (dp[i] > dp[j]) {
-				arr[i] = max(arr[j] + 1, arr[i]);
+			if (A[i] > A[j]) { // 지금까지 만든 LIS 뒤에 A[i]를 붙일 수 있다면
+				C[i] = max(C[j] + 1, C[i]);
 			}
 		}
-		sum = max(sum, arr[i]);
+		sum = max(sum, C[i]);
 	}
 
-	cout << ++sum;
+	cout << sum << "\n";
 	return 0;
 }
 ```
+
+위는 재귀함수를 사용하지 않고 답을 구현했다.
+
+"find(n) : n번째 원소를 처음으로 하는 최대 LIS 의 길이"를 "C[i] : i 번쨰 원소를 마지막으로 하는 최대 LIS의 길이"의 의미로 다소 조정하여 동일하게 해법을 구할 수 있다.
