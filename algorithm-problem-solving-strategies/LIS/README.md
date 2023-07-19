@@ -40,6 +40,8 @@
 
 ## 문제해결
 
+### DP를 이용한 O(n^2) 알고리즘
+
 '현재 탐색하고 있는 A[i]'를 기준으로, '배열 우측에 있는 자신 보다 큰 임의의 A[i + a]들 중'에서 최대 길이를 만들 수 있는 A[j]를 찾으면 된다.
 
 이 과정은 재귀 호출을 통해서 구현할 수 있고, A[i]는 A[j] 이후 배열이 어떠한지에 상관이 없이 문제의 조건이 충족되므로 부분최대구조를 만족한다. 따라서 현재 A[i] 까지 만들 수 있는 최대 수열의 길이를 캐시에 저장하면 중복된 계산을 피할 수 있다.
@@ -53,3 +55,51 @@
 이를 해결하기 위해서는 간단한 트릭을 사용하면 되는데
 입력된 수열의 -1 index에 가상의 최소값을 가정하고 find(-1)을 호출하면 find(-1)이 알아서 모든 값을 순회하는 효과를 얻게된다.
 이때 find(-1)의 값은 가상의 값을 포함한 LIS의 크기이므로 찾은 결과에서 -1을 빼면 결과를 구할 수 있다.
+
+### DP를 이용한 O(nlogn) 알고리즘
+
+
+> 재귀 없이 풀어보기
+
+#### py additional
+``` py
+n = int(input())
+arr = list(map(int,input().split()))
+cnt = [1] * n
+
+for i in range(n):
+	for j in range(i):
+		if arr[j] < arr[i]:
+			cnt[i] = max(cnt[i], cnt[j]+1)
+
+print(max(cnt))
+```
+
+``` cpp
+#include <iostream>
+using namespace std;
+
+int dp[1001];
+int arr[1001];
+
+int main() {
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> dp[i];
+	}
+	
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < i; j++) {
+			if (dp[i] > dp[j]) {
+				arr[i] = max(arr[j] + 1, arr[i]);
+			}
+		}
+		sum = max(sum, arr[i]);
+	}
+
+	cout << ++sum;
+	return 0;
+}
+```
