@@ -133,7 +133,7 @@ int findNumMove()
     }
     return to_string(targetMid).length() + abs(trgtChnl - targetMid);
 }
-int worngCode()
+int wrongCode()
 {
     // cin >> trgtChnl >> N;
     trgtChnlStr = to_string(trgtChnl);
@@ -187,8 +187,8 @@ int main()
 
         int right, wrong;
         right = rightCode();
-        wrong = worngCode();
-        if (rightCode() != worngCode()) 
+        wrong = wrongCode();
+        if (right != wrong) 
         {
             cout << "trgtChnl = " << trgtChnl << endl;
             cout << "N = " << N << endl;
