@@ -1,9 +1,10 @@
 #include<iostream>
+#include<memory.h>
 using namespace std;
 
-int R, B, N;
-const int MOD = 1000000007;
-int cache[480][50001]; //[현재까지 그린 원의 개수][사용한 빨간 페인트의 수]
+int R, B;
+const long long MOD = 1000000007;
+long long cache[480][50001]; //[현재까지 그린 원의 개수][사용한 빨간 페인트의 수]
 
 inline int calcBlue(int n, int red)
 // 빨간 페인드틀 'red' 만큼 사용, 그린 원의 수가 'n' 일때 
@@ -12,19 +13,15 @@ inline int calcBlue(int n, int red)
     return n * (n + 1) / 2 - red;
 }
 
-int num(int n, int red)
-// 페인트를 'red' 만큰 사용하고
-// n개의 원을 그렸을 때
-// 색칠 가능한 종류
+long long num(int n, int red)
+// 페인트를 'red' 만큰 사용하고 n개의 원을 그렸을 때 색칠 가능한 종류
 {
-    // 0. 사전 계산
-    int blue = calcBlue(n, red);
-
     // 1. 기저사례
+    int blue = calcBlue(n, red);
     if (red > R || blue > B) return 0; // 페인트가 모자람
 
     // 2. 캐시 확인
-    int & ret = cache[n][red];
+    long long & ret = cache[n][red];
     if (ret != -1) return ret;
 
     // 3. 계산
@@ -33,6 +30,10 @@ int num(int n, int red)
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
     int T;
     cin >> T;
     while(T--)
@@ -40,9 +41,8 @@ int main()
         memset(cache, -1, sizeof(cache));
         cin >> R >> B;
         // 하나도 그리지 않는 경우는 없으므로 num(0,0)은 호출할 수 없다.
-        cout << ((num(1,1) + num(1,0)) % MOD) << endl;
+        cout << ((num(1,1) + num(1,0)) % MOD) << '\n';
     }
-
 }
 
 
@@ -142,7 +142,7 @@ T = 1.
 */
 
 /*
-73 43658 
-right Ans = 891291170
-worng Ans = 111212286
+40073 43658 
+right Ans = 608791388
+worng Ans = 833986559
 */
