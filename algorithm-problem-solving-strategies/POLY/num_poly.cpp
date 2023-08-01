@@ -16,6 +16,7 @@ int poly(int n, int first)
     int sum = 0;
     for (int i = 1; i <= n - first; ++i)
     {
+        // sum = max(1,000,000,000) 이므로 오버플로우 x
         sum += ((first + i - 1) * poly(n - first, i)) % MOD;
         sum %= MOD;
     }
