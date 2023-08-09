@@ -16,16 +16,8 @@ int main()
     while(e <= N)
     {
         if (sum == M) ++num;
-        if (sum >= M)
-        {
-            sum -= A[s];
-            ++s;
-        }
-        else
-        {
-            sum += A[e];
-            ++e;
-        }
+        if (sum >= M) sum -= A[s++];
+        else sum += A[e++];
     }
     printf("%d", num);
 }
