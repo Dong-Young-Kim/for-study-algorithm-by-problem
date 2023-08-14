@@ -5,68 +5,70 @@ using namespace std;
 
 struct Node
 {
-    int parent;
-    vector<int> child;
-    vector<int> adjcent;
+    Node* parent;
+    vector<Node*> child;
+    vector<int> idxAdjcent; // for input
+    int sizeSubtree;
 };
 vector<Node> nodes(100001); // adjecent list
+
 int N, R, Q; // node, root, query
 
 void makeTree(int idxCurrentNode, int idxParent)
 {
     Node& curNode = nodes[idxCurrentNode];
 
-    int adjSize = curNode.adjcent.size();
+    int adjSize = curNode.idxAdjcent.size();
     for (int i = 0; i < adjSize; ++i)
     {
-        int idxAdjNode = curNode.adjcent[i];
-        if (idxAdjNode != idxParent)
+        Node& adjNode = nodes[curNode.idxAdjcent[i]];
+        if (curNode.idxAdjcent[i] != idxParent)
         {
             // add Node to currentNode’s child
-            curNode.child.push_back(idxAdjNode);
+            curNode.child.push_back(&adjNode);
 
             // set Node’s parent to currentNode
-            nodes[idxAdjNode].parent = idxCurrentNode;
+            adjNode.parent = &curNode;
 
-            makeTree(idxAdjNode, idxCurrentNode);
+            makeTree(curNode.idxAdjcent[i], idxCurrentNode);
         }
     }
 }
 
-void countSubtree(int idxCurrentNode)
+void countSubtree(Node* curNode)
 {
-    Node& curNode = nodes[idxCurrentNode];
+    curNode->sizeSubtree = 1;
 
-    int childSize = curNode.child.size();
-    for (int i = 0; i < childSize; ++i)
+    for (Node* child : curNode->child)
     {
-        int idxChildNode = curNode.child[i];
-        countSubtree(idxChildNode);
+        countSubtree(child);
+        curNode->sizeSubtree += child->sizeSubtree;   
     }
 }
 
 int main()
 {
     cin >> N >> R >> Q;
-    for (int i = 0; i < N; ++i)
+    for (int i = 0; i < N-1; ++i)
     {
         int v1, v2;
         cin >> v1 >> v2;
 
         // 모든 간선 정보를 adejecent list 형식으로 저장한다.
-        nodes[v1].adjcent.push_back(v2);
-        nodes[v2].adjcent.push_back(v1);
+        nodes[v1].idxAdjcent.push_back(v2);
+        nodes[v2].idxAdjcent.push_back(v1);
     }
     
-    nodes[R].parent = -1;
+    nodes[R].parent = nullptr;
     makeTree(R, -1); // root node, parent node
+
+    countSubtree(&nodes[R]);
     
     for (int i = 0; i < Q; ++i)
     {
         int query;
         cin >> query;
-        cout << nodes[query].child.size() + 1 << '\n';
+        cout << nodes[query].sizeSubtree << '\n';
     }
-
 
 }
