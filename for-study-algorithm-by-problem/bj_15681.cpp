@@ -2,7 +2,6 @@
 #include <vector>
 using namespace std;
 
-
 struct Node
 {
     Node* parent;
@@ -48,6 +47,7 @@ void countSubtree(Node* curNode)
 
 int main()
 {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
     cin >> N >> R >> Q;
     for (int i = 0; i < N-1; ++i)
     {
@@ -70,5 +70,4 @@ int main()
         cin >> query;
         cout << nodes[query].sizeSubtree << '\n';
     }
-
 }
