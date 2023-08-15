@@ -1,0 +1,79 @@
+{
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+        {
+            "scope": "keyword",
+            "settings": {
+            "foreground": "#cccccc",
+            }
+        },
+        {
+            "scope": "keyword.other",
+            "settings": {
+            "foreground": "#eba4fe",
+            }
+        },
+        {
+            "scope": "keyword.control",
+            "settings": {
+            "foreground": "#ff7b72",
+            }
+        },
+        {
+            "scope": "storage.type",
+            "settings": {
+            "foreground": "#0f9bec",
+            }
+        },
+        {
+            "scope": "storage.modifier",
+            "settings": {
+            "foreground": "#55c1ff",
+            }
+        },
+        {
+            "scope": "variable",
+            "settings": {
+            "foreground": "#b9e5ff",
+            }
+        },
+        {
+            "scope": "variable.other",
+            "settings": {
+            "foreground": "#b9e5ff",
+            }
+        },
+        {
+            "scope": "variable.other.global",
+            "settings": {
+            "foreground": "#eeeeee",
+            }
+        },
+        {
+            "scope": "entity.name",
+            "settings": {
+            "foreground": "#00d495",
+            }
+        },
+        {
+            "scope": "entity.name.function",
+            "settings": {
+            "foreground": "#ffd858",
+            }
+        },
+        {
+            "scope": "comment",
+            "settings": {
+            "foreground": "#6a9955",
+            }
+        },
+        {
+            "scope": "punctuation.definition.comment",
+            "settings": {
+            "foreground": "#6a9955",
+            }
+        }
+        
+        ]
+    }
+}
