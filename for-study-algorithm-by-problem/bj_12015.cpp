@@ -16,7 +16,8 @@ void insert(int num)
 
     // 증가하는 수열이라면
     if (cache.back() < num) cache.push_back(num);
-    else{
+    else
+    {
         // lower_bound 는 찾으려는 값보다 크거나 같은 첫번째 위치를 반환
         vector<int>::iterator it = lower_bound(cache.begin(), cache.end(), num);
         *it = num; // 그 위치에 새로운 값으로 치환
