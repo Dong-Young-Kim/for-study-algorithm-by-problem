@@ -14,7 +14,7 @@ void deleteLeadingZeros(vector<int> &a)
     }
 }
 
-// two positive integers
+// two positive integers adder
 vector<int> adder(vector<int> &a, vector<int> &b)
 {
     int alen = a.size();
@@ -34,6 +34,58 @@ vector<int> adder(vector<int> &a, vector<int> &b)
     }
     if (carry)
         result.push_back(carry);
+    return result;
+}
+
+vector<int> tensComplement(vector<int> &a)
+{
+    int alen = a.size();
+    vector<int> result;
+
+    // 9's complement
+    for (int i = 0; i < alen; i++) a[i] = 9 - a[i];
+
+    // add 1 (10's complement)
+    int carry = 1;
+    for (int i = 0; i < alen; ++i)
+    {
+        int si = a[i] + carry;
+        result.push_back(si % 10);
+        carry = si / 10;
+    }
+
+    return result;
+}
+
+// two positive integers subtractor (a - b)
+vector<int> subtractor(vector<int> &a, vector<int> &b)
+{
+    // make b's length same as a's
+    for (int i = b.size(); i < a.size(); ++i)
+    {
+        b.push_back(0);
+    }
+
+    // b, 10's complement
+    b = tensComplement(b);
+
+    vector<int> result;
+    // add
+    result = adder(a, b);
+
+    if(result.size() > max(a.size(), b.size()))
+    {
+        // result positive
+        result.pop_back();
+    }
+    else
+    {
+        // result negative
+        result = tensComplement(result);
+        // result.end()[-1] = -result.end()[-1];
+        result.back() = -result.back();
+    }
+
     return result;
 }
 
@@ -74,7 +126,8 @@ int main()
     //   cout << b[i];
     // cout << endl;
 
-    vector<int> c = adder(a, b);
+    // vector<int> c = adder(a, b);
+    vector<int> c = subtractor(a, b);
 
     cout << "result = ";
     for (int i = c.size() - 1; i >= 0; --i)
