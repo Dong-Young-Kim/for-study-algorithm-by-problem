@@ -6,6 +6,7 @@ using namespace std;
 
 void deleteLeadingZeros(vector<int> &a)
 {
+    if (a.size() == 1) return;
     for (int i = a.size() - 1; i >= 1; --i)
     {
         if (a[i] != 0)
