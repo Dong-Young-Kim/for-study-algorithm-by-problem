@@ -61,6 +61,9 @@ vector<int> tensComplement(vector<int> &a)
 // two positive integers subtractor (a - b)
 vector<int> subtractor(vector<int> &a, vector<int> &b)
 {
+    // exception b == 0
+    if (b.size() == 1 && b[0] == 0) return a;
+
     // make b's length same as a's
     for (int i = b.size(); i < a.size(); ++i)
     {
@@ -78,11 +81,13 @@ vector<int> subtractor(vector<int> &a, vector<int> &b)
     {
         // result positive
         result.pop_back();
+        deleteLeadingZeros(result);
     }
     else
     {
         // result negative
         result = tensComplement(result);
+        deleteLeadingZeros(result); // delete leading zero before add '-'
         // result.end()[-1] = -result.end()[-1];
         result.back() = -result.back();
     }
