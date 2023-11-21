@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void deleteLeadingZeros(vector<int> &a)
+void deleteLeadingZeros(vector<char> &a)
 {
     if (a.size() == 1) return;
     for (int i = a.size() - 1; i >= 1; --i)
@@ -21,19 +21,19 @@ void deleteLeadingZeros(vector<int> &a)
 }
 
 // two positive integers adder
-vector<int> adder(vector<int> &a, vector<int> &b)
+vector<char> adder(vector<char> &a, vector<char> &b)
 {
     int alen = a.size();
     int blen = b.size();
 
-    vector<int> result;
+    vector<char> result;
 
-    int carry = 0;
+    char carry = 0;
     for (int i = 0; i < max(alen, blen); ++i)
     {
-        int ai = i < alen ? a[i] : 0;
-        int bi = i < blen ? b[i] : 0;
-        int si = ai + bi + carry;
+        char ai = i < alen ? a[i] : 0;
+        char bi = i < blen ? b[i] : 0;
+        char si = ai + bi + carry;
 
         result.push_back(si % 10);
         carry = si / 10;
@@ -45,7 +45,7 @@ vector<int> adder(vector<int> &a, vector<int> &b)
 
 int main(){
 
-    vector<int> a, b;
+    vector<char> a, b;
 
     // raw data input
     string sa, sb;
@@ -67,10 +67,10 @@ int main(){
     deleteLeadingZeros(a);
     deleteLeadingZeros(b);
 
-    vector<int> c = adder(a, b);
+    vector<char> c = adder(a, b);
 
     for (int i = c.size() - 1; i >= 0; --i)
-        cout << c[i];
+        cout << (int)c[i];
     cout << endl;
 
 }
