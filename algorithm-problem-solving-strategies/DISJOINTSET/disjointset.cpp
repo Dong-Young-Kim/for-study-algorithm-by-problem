@@ -33,11 +33,11 @@ struct NaiveDisjointSet {
     }
 };
 
-struct NaiveDisjointSet {
+struct DisjointSet {
     vector<int> parent, rank;
     
     // 모든 원소가 각각의 집합에 속하도록 초기화 
-    NaiveDisjointSet(int n)
+    DisjointSet(int n)
         : parent(n), rank(n, 1)
     {
         for(int i = 0; i < n; ++i)
