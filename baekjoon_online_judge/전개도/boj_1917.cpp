@@ -104,7 +104,7 @@ int main()
     {
         for(int i = 0; i < 6; i++) cube[i] = 0; 
         int x = 0, y = 0;
-        for(int i = 0; i < 36; i++) scanf("%d", &board[i / 6][i % 6]);
+        for(int i = 0; i < 36; i++) scanf("%hhd", &board[i / 6][i % 6]);
         for(int i = 0; i < 36; i++)
         {
             if(board[i / 6][i % 6] == 1)
