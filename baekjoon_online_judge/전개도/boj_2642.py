@@ -18,19 +18,13 @@ def move_dice(dice, direction):
         dice[0], dice[1], dice[4], dice[5] = dice[4], dice[5], dice[1], dice[0]
 
 def check(dice):
-    return True if sum(dice) == 21 else False
+    return bool(sum(dice) == 21)
 
 def out_of_range(pos):
-    if pos[0] < 0 or pos[0] >= 6 or pos[1] < 0 or pos[1] >= 6:
-        return True
-    else: 
-        return False
+    return pos[0] < 0 or pos[0] >= 6 or pos[1] < 0 or pos[1] >= 6
 
 def first_contact(pos, dice):
-    if board[pos[0]][pos[1]] != 0 and dice[1] == 0:
-        return True
-    else: 
-        return False
+    return board[pos[0]][pos[1]] != 0 and dice[1] == 0
 
 def dfs(pos, dice): # 현재 위치, 주사위
 
@@ -64,10 +58,9 @@ for i in range(36):
     x, y = i // 6, i % 6
     if board[x][y] != 0: break
 
-dice[1] = board[x][y]
+dice[1] = board[x][y] # DONT FORGET TO SET BOTTOM NUMBER
 dfs((x, y), dice)
-if check(dice): print(dice[opposite_plane_idx[dice.index(1)]])
-else: print(0)
+print(dice[opposite_plane_idx[dice.index(1)]]) if check(dice) else print(0)
 
 
 """
