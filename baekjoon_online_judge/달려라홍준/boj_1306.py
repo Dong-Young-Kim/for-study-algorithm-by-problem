@@ -10,7 +10,7 @@ from collections import deque
 
 N, M = map(int, sys.stdin.readline().split())
 arr = list(map(int, sys.stdin.readline().split()))
-window = deque(arr[:2 * M - 1]) 
+window = deque(arr[:2 * M - 1]) # 초기화 과정을 이와 같이 단순화
 crnt_max = max(window)
 window_maxes = [str(crnt_max)]
 
