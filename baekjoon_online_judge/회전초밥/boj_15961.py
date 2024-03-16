@@ -10,27 +10,24 @@ belt = [int(sys.stdin.readline()) for _ in range(N)]
 #     if type_cnt[c] == 0: return d - type_cnt.count(0) + 2
 #     else: return d - type_cnt.count(0) + 1
 
-
-type_cnt = [0] * (d + 1) # [0]은 전체 종류
+type_cnt = [0] * (d + 1)
+type_cnt[c] += 1 # type_cnt[c]를 미리 추가한다면 구현이 매우 단순해진다
+num_type, max_type = 1, 1
 
 for i in range(k):
-    if type_cnt[belt[i]] == 0: type_cnt[0] += 1
+    if type_cnt[belt[i]] == 0: num_type += 1
     type_cnt[belt[i]] += 1
 
-# max_type = type_cnt[0] + 1 if type_cnt[c] == 0 else type_cnt[0]
-max_type = 0
 for i in range(0, N):
-    if type_cnt[belt[i]] == 1: type_cnt[0] -= 1
+    if type_cnt[belt[i]] == 1: num_type -= 1
     type_cnt[belt[i]] -= 1
-
-    if type_cnt[belt[(i + k) % N]] == 0: type_cnt[0] += 1
+    if type_cnt[belt[(i + k) % N]] == 0: num_type += 1
     type_cnt[belt[(i + k) % N]] += 1
-
-    max_type = max(max_type, type_cnt[0] + 1 if type_cnt[c] == 0 else type_cnt[0])
+    max_type = max(max_type, num_type)
     
 print(max_type)
 
-# type_cnt[0]: 전체 종류
+# num_type: 전체 종류
 # type_cnt[i]: ]: i번 초밥의 개수 
 # type_cnt[belt[i]]: 벨트 위 i번째 초밥의 개수
 
