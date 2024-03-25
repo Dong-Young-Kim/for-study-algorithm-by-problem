@@ -11,7 +11,11 @@ arr = list(map(int, input().split()))
 visited = [False] * N
 min_total_move = sys.maxsize
 
+def circleDist(a, b):
+    return min(abs(a - b), N - abs(a - b))
+
 def solve(cur, remain, move):
+    # 모든 조건에 부합하여 탐색이 완료된 경우 최솟값을 갱신한다.
     if remain == 0:
         global min_total_move
         min_total_move = min(min_total_move, move)
@@ -20,7 +24,7 @@ def solve(cur, remain, move):
     for new in range(N):
         if visited[new] or arr[cur] > arr[new]: continue
         visited[new] = True
-        solve(new, remain - 1, move + min(abs(cur - new), N - abs(cur - new)))
+        solve(new, remain - 1, move + circleDist(cur, new))
         visited[new] = False
 
 for i in range(N):
