@@ -3,11 +3,12 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <map>
 using namespace std;
 
 int INF = std::numeric_limits<int>::max();
 int N;
-int cache[10005][10005]; // 너무 큼
+map<pair<int,int>, int> cache_m;
 
 vector<vector<int>> cidx;
 
@@ -16,8 +17,8 @@ int circleDist(int a, int b) {
 }
 
 int dp(int c, int e) {
-
-    if(cache[c][e] != -1) return cache[c][e];
+    auto cache_res = cache_m.find(make_pair(c, e));
+    if(cache_res != cache_m.end()) return cache_res->second;
     
     int min_val = INF;
     for (int i = 0; i < cidx[c].size(); i++) {
@@ -33,7 +34,7 @@ int dp(int c, int e) {
             min_val = min(min_val, dp(c - 1, c2) + path + circleDist(c1, e));
         }
     }
-    return cache[c][e] = min_val;
+    return cache_m[make_pair(c, e)] = min_val;
 }
 
 int main() {
@@ -58,8 +59,6 @@ int main() {
         int a = lower_bound(sorted_arr.begin(), sorted_arr.end(), arr[i]) - sorted_arr.begin();
         cidx[a].push_back(i);
     } 
-
-    memset(cache, -1, sizeof(cache));
     int min_val = INF;
     for (int i = 0; i < cidx.back().size(); i++) {
         min_val = min(min_val, dp(cidx.size() - 1, cidx.back()[i]));
@@ -68,4 +67,3 @@ int main() {
 
     return 0;
 }
-
